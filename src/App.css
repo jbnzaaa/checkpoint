@@ -255,14 +255,25 @@ body {
   align-items: center;
   flex-direction: column;
 }
-  
-  #horizontal-container .content .end .h-container {
-    font-family: "Jersey 10", sans-serif;
-    font-size: 143px;
-  }
-  
-  #horizontal-container .content .end .p-container {
-    font-size: 30px;
-    text-align: center;
-    width: 800px;
-  }
+
+#horizontal-container .content .end .h-container {
+  font-family: "Jersey 10", sans-serif;
+  font-size: 143px;
+}
+
+#horizontal-container .content .end .p-container {
+  font-size: 30px;
+  text-align: center;
+  width: 800px;
+}
+
+.char,
+.word,
+.line {
+  display: inline-block;
+}
+
+.h-container,
+.p-container {
+  overflow: hidden;
+}
