@@ -14,6 +14,9 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SplitType from "split-type";
 import music from "./assets/music/Wieee.mp3";
+import Image1 from "./assets/img/img1.jpg";
+import Image2 from "./assets/img/img3.jpg";
+import Image3 from "./assets/img/img6.jpeg";
 gsap.registerPlugin(ScrollTrigger);
 
 function App() {
@@ -66,7 +69,7 @@ function App() {
       ScrollTrigger.create({
         trigger: section,
         containerAnimation: horizontalTween,
-        markers: true,
+        // markers: true,
         start: "center center",
         end: "center center",
         onEnter: () => setActiveIndex(index),
@@ -82,7 +85,7 @@ function App() {
   return (
     <div>
       <div className="nav">
-        <h6 style={{ color: sectionColors[activeIndex] }}>scelerisque</h6>
+        <h6 style={{ color: sectionColors[activeIndex] }}>February 2026</h6>
 
         <ul>
           <li>
@@ -161,10 +164,10 @@ function App() {
         <div className="content">
           <div className="start">
             <div className="h-container" ref={textRef}>
-              Nunc scelerisque amet
+              Monthsary Checkpoint
             </div>
             <div className="p-container" ref={textRef}>
-              Egestas bibendum
+              Look back at the memories we've spent together for this month.
             </div>
           </div>
         </div>
@@ -172,9 +175,9 @@ function App() {
         {/* Days */}
         <div className="content">
           <div className="days">
-            <p className="p-container" ref={textRef}>Egestas bibendum</p>
-            <h1 className="h-container" ref={textRef}>5,640 hours</h1>
-            <p className="p-container" ref={textRef}>Lorem ipsum dolor sit amet consectetur. Semper at a quis sed id. Ipsum mi leo ultrices cursus ac. Erat aliquet ultrices eget auctor quisque feugiat. Egestas eget nisl.</p>
+            <p className="p-container" ref={textRef}>Time spent since June 16</p>
+            <h1 className="h-container" ref={textRef}>5,832 hours</h1>
+            <p className="p-container" ref={textRef}>filled with laughter, stories, quiet moments, and memories I’ll always treasure.</p>
           </div>
         </div>
 
@@ -187,9 +190,9 @@ function App() {
               <p className="p-container" ref={textRef}>Sollicitudin dui sem eget proin ornare ut laoreet eget. Donec a malesuada accumsan et. Et maecenas ullamcorper semper id.</p>
             </div> */}
             <div className="img-gallery">
-              <img id='img' src="https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=" alt="" />
-              <img id='img' src="https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=" alt="" />
-              <img id='img' src="https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=" alt="" />
+              <img id='img' src={Image1} alt="" />
+              <img id='img' src={Image2} alt="" />
+              <img id='img' src={Image3} alt="" />
             </div>
           </div>
         </div>
@@ -198,14 +201,17 @@ function App() {
         <div className="content">
           <div className="bondings">
             <div>
-              <p className="p-container" ref={textRef}>Aliquet posuere</p>
-              <h1 className="h-container" ref={textRef}>Nibh et imperdi</h1>
-              <p className="p-container" ref={textRef}>Neque ultrices lectus dolor amet et aliquam non amet condimentum. In vel id semper tortor malesuada erat id tellus sapien. Sapien diam id iaculis cursus vel ut porttitor nulla adipiscing. </p>
+              <p className="p-container" ref={textRef}>Highlights of the Month</p>
+              <h1 className="h-container" ref={textRef}>Sweet Moments</h1>
+              <p className="p-container" ref={textRef}>From late-night Call of Duty: Mobile matches to laughing across the
+        badminton, this month was simple but special. Every game, every
+        rally, every shared smile reminded me that the best part of it all is
+        loving you.</p>
             </div>
             <ul>
-              <li ref={textRef}>Call of Duty Mobile</li>
-              <li ref={textRef}>Netflix</li>
-              <li ref={textRef}>Badminton</li>
+              <li ref={textRef}><span>#1</span>Call of Duty Mobile</li>
+              <li ref={textRef}><span>#3</span>Badminton</li>
+              <li ref={textRef}><span>#2</span>Netflix</li>
             </ul>
           </div>
         </div>
@@ -213,16 +219,23 @@ function App() {
         {/* Message */}
         <div className="content">
           <div className="message">
-            <p className="p-container" ref={textRef}>Aliquet posuere</p>
-            <h1 className="h-container" ref={textRef}>Pulvinar in purus</h1>
-            <p className="p-container" ref={textRef}>Viverra at tempus donec id porttitor fermentum. Gravida malesuada vitae turpis ac ultricies volutpat odio nisl aliquet. Mattis egestas mi enim auctor turpis. Risus sed eu blandit vulputate magna. Vel volutpat ultrices vulputate sed odio mauris ridiculus. Quis velit nullam eget egestas id ut viverra pellentesque. Nulla id faucibus nulla parturient dictum dui a. Commodo nec quis tortor etiam quis. Aliquam sodales ipsum pretium dictum. </p>
+            <p className="p-container" ref={textRef}>To my beloved</p>
+            <h1 className="h-container" ref={textRef}>Baby Ellie</h1>
+            <p className="p-container" ref={textRef}>
+              It’s been 8 months since we chose each other, and I just want to say thank you for loving me the way you do every single day. This month meant so much to me. It showed me that no matter how hard things get or what challenges come our way, we can always fix it as long as we hold on to each other.
+
+We laughed, we played, we had fun, and we loved each other in the simplest but sweetest ways. Those moments reminded me why I’m so lucky to have you.
+
+Let’s keep making memories together, one day at a time, until our hair turns gray and we’re still teasing and loving each other the same way. I love you so, so much, baby.
+            </p>
           </div>
         </div>
 
         {/* End */}
         <div className="content">
           <div className="end">
-              <h1 className="h-container" ref={textRef}>ipsum pretium dictum</h1>
+              <div className="p-container">Happy Monthsary and Happy Valentines</div>
+              <h1 className="h-container" ref={textRef}>I Love you Babyyy!</h1>
           </div>
         </div>
       </div>
