@@ -32,49 +32,53 @@ function App() {
     "#D93D20",
   ];
 
-  const audioRef = useRef(null);
-  const [playing, setPlaying] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
 
-  const toggleMusic = async () => {
-    const audio = audioRef.current;
+  const audioRef = useRef(null); // Audio reference
+  const containerRef = useRef(null); // GSAP container reference
 
-    if (!audio) return;
+  // Preload audio on mount
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.load();
+    }
+  }, []);
+
+  // Play/pause audio handler
+  const toggleAudio = async () => {
+    if (!audioRef.current) return;
 
     try {
-      if (playing) {
-        audio.pause();
+      if (isPlaying) {
+        audioRef.current.pause();
       } else {
-        await audio.play(); // handles autoplay restrictions
+        await audioRef.current.play(); // async for modern browsers
       }
-      setPlaying(!playing);
+      setIsPlaying(!isPlaying);
     } catch (err) {
-      console.log("Audio play prevented by browser:", err);
+      console.log("Audio play failed:", err);
     }
   };
 
+  // GSAP horizontal scroll & animations
   useEffect(() => {
-    audioRef.current = new Audio(music);
-    audioRef.current.loop = true;
-    audioRef.current.volume = 0.6;
+    if (!containerRef.current) return;
 
-    const sections = gsap.utils.toArray("#horizontal-container .content");
+    const sections = containerRef.current.querySelectorAll(".content");
+    if (!sections.length) return;
 
-    // Horizontal scroll tween
     const horizontalTween = gsap.to(sections, {
       xPercent: -100 * (sections.length - 1),
       ease: "none",
       scrollTrigger: {
-        trigger: "#horizontal-container",
+        trigger: containerRef.current,
         pin: true,
         scrub: 1,
-        end: () =>
-          "+=" +
-          document.querySelector("#horizontal-container").offsetWidth,
+        end: () => "+=" + containerRef.current.offsetWidth,
       },
     });
 
-    // ACTIVE NAV INDICATOR (fixed)
     sections.forEach((section, index) => {
       ScrollTrigger.create({
         trigger: section,
@@ -86,7 +90,6 @@ function App() {
       });
     });
 
-    // SPLITTYPE ANIMATION PER SECTION
     sections.forEach((section) => {
       const headings = section.querySelectorAll(".h-container");
       const paragraphs = section.querySelectorAll(".p-container");
@@ -149,19 +152,17 @@ function App() {
 
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-      if (audioRef.current) {
-        audioRef.current.pause();
-      }
     };
   }, []);
 
   return (
     <div>
+      {/* Audio element */}
+      <audio ref={audioRef} src={music} preload="auto" />
+
       {/* NAVIGATION */}
       <div className="nav">
-        <h6 style={{ color: sectionColors[activeIndex] }}>
-          February 2026
-        </h6>
+        <h6 style={{ color: sectionColors[activeIndex] }}>February 2026</h6>
 
         <ul>
           <li>
@@ -214,6 +215,7 @@ function App() {
           </li>
         </ul>
 
+        {/* Audio toggle button */}
         <button
           className="btn-link"
           style={{
@@ -221,9 +223,9 @@ function App() {
             boxShadow: `5px 5px 0 ${sectionColors[activeIndex]}`,
             background: "#0E0E0C",
           }}
-          onClick={toggleMusic}
+          onClick={toggleAudio}
         >
-          {playing ? (
+          {isPlaying ? (
             <BiSolidVolumeFull color={sectionColors[activeIndex]} />
           ) : (
             <BiSolidVolumeMute color={sectionColors[activeIndex]} />
@@ -232,7 +234,7 @@ function App() {
       </div>
 
       {/* HORIZONTAL SCROLL */}
-      <div id="horizontal-container">
+      <div id="horizontal-container" ref={containerRef}>
         <div className="content">
           <div className="start">
             <div className="h-container">Monthsary Checkpoint</div>
@@ -247,7 +249,8 @@ function App() {
             <p className="p-container">Time spent since June 16</p>
             <h1 className="h-container">5,832 hours</h1>
             <p className="p-container">
-              filled with laughter, stories, quiet moments, and memories I’ll always treasure.
+              filled with laughter, stories, quiet moments, and memories I’ll
+              always treasure.
             </p>
           </div>
         </div>
@@ -255,9 +258,9 @@ function App() {
         <div className="content">
           <div className="moments">
             <div className="img-gallery">
-              <img id="img" src={Image1} alt="" />
-              <img id="img" src={Image2} alt="" />
-              <img id="img" src={Image3} alt="" />
+              <img src={Image1} alt="" />
+              <img src={Image2} alt="" />
+              <img src={Image3} alt="" />
             </div>
           </div>
         </div>
@@ -268,31 +271,22 @@ function App() {
               <p className="p-container">Highlights of the Month</p>
               <h1 className="h-container">Sweet Moments</h1>
               <p className="p-container">
-                From late-night Call of Duty matches to laughing across the badminton, this month was simple but special. Every game, every rally, every shared smile reminded me that the best part of it all is loving you.
+                From late-night Call of Duty matches to laughing across the
+                badminton, this month was simple but special.
               </p>
             </div>
 
             <ul>
-              <li><span>#1</span> Call of Duty Mobile</li>
-              <li><span>#2</span> Netflix</li>
-              <li><span>#3</span> Badminton</li>
+              <li>
+                <span>#1</span> Call of Duty Mobile
+              </li>
+              <li>
+                <span>#2</span> Netflix
+              </li>
+              <li>
+                <span>#3</span> Badminton
+              </li>
             </ul>
-          </div>
-        </div>
-
-        <div className="content">
-          <div className="message">
-            <p className="p-container">To my beloved</p>
-            <h1 className="h-container">Baby Ellie</h1>
-            <p className="p-container">
-              It’s been 8 months since we chose each other, and I just want to say thank you for loving me the way you do every single day. This month meant so much to me. No matter what challenges come our way, we can always fix it as long as we hold on to each other.
-              <br />
-              <br />
-              We laughed, we played, we had fun, and we loved each other in the simplest but sweetest ways. Those moments reminded me why I’m so lucky to have you.
-              <br />
-              <br />
-              Let’s keep making memories together, one day at a time. I love you so, so much.
-            </p>
           </div>
         </div>
 

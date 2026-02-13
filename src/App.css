@@ -26,6 +26,7 @@ body {
   padding: 0px 150px;
   position: fixed;
   top: 0;
+  z-index: 1000; /* Added for layering */
 }
 
 .nav h6 {
@@ -135,7 +136,7 @@ body {
   gap: 30px;
 }
 
-#horizontal-container .moments #img {
+#horizontal-container .moments img {
   display: flex;
   justify-content: center;
   align-self: center;
@@ -146,23 +147,23 @@ body {
   filter: grayscale(100%);
 }
 
-#horizontal-container .moments #img:hover {
+#horizontal-container .moments img:hover {
   filter: none;
   transition: 0.5s ease-in-out;
 }
 
 /* Rotate each image differently */
-#horizontal-container .moments #img:nth-child(1) {
+#horizontal-container .moments img:nth-child(1) {
   transform: rotate(-4deg);
   z-index: 1;
 }
 
-#horizontal-container .moments #img:nth-child(2) {
+#horizontal-container .moments img:nth-child(2) {
   transform: rotate(5deg);
   z-index: 2;
 }
 
-#horizontal-container .moments #img:nth-child(3) {
+#horizontal-container .moments img:nth-child(3) {
   transform: rotate(-3deg);
   z-index: 3;
 }
